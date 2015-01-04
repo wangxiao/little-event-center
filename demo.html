@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>little-event-center</title>
+    </head>
+    <body>
+        <script src="little-event-center.js"></script>
+        <script type="text/javascript">
+        var ec = eventCenter();
+        
+        ec.on('wangxiao1', function() {
+            console.log('ttt1');
+        });
+
+        ec.once('wangxiao1', function() {
+            console.log('ttt2');
+        });
+
+        ec.on('wangxiao2', function() {
+            console.log('ttt3');
+        });
+
+        ec.once('wangxiao2', function() {
+            console.log('ttt4');
+        });
+
+        ec.remove('wangxiao2');
+
+        ec.emit('wangxiao2');
+        </script>
+    </body>
+</html>
