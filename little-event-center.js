@@ -41,7 +41,7 @@ var eventCenter = function() {
                 l = eventList[eventName].length;
                 for (; i < l; i ++) {
                     // 有可能执行过程中，删除了某个事件对应的方法
-                    if (l < eventList[eventName].length) {
+                    if (l > eventList[eventName].length) {
                         i --;
                         l = eventList[eventName].length;
                     }
@@ -53,7 +53,7 @@ var eventCenter = function() {
                 l = eventOnceList[eventName].length;
                 for (; i < l; i ++) {
                     // 有可能执行过程中，删除了某个事件对应的方法
-                    if (l < eventOnceList[eventName].length) {
+                    if (l > eventOnceList[eventName].length) {
                         i --;
                         l = eventOnceList[eventName].length;
                     }
