@@ -40,6 +40,11 @@ var eventCenter = function() {
                 i = 0;
                 l = eventList[eventName].length;
                 for (; i < l; i ++) {
+                    // 有可能执行过程中，删除了某个事件对应的方法
+                    if (l < eventList[eventName].length) {
+                        i --;
+                        l = eventList[eventName].length;
+                    }
                     eventList[eventName][i].call(this, data);
                 }
             }
@@ -47,9 +52,13 @@ var eventCenter = function() {
                 i = 0;
                 l = eventOnceList[eventName].length;
                 for (; i < l; i ++) {
+                    // 有可能执行过程中，删除了某个事件对应的方法
+                    if (l < eventOnceList[eventName].length) {
+                        i --;
+                        l = eventOnceList[eventName].length;
+                    }
                     eventOnceList[eventName][i].call(this, data);
                 }
-                eventOnceList[eventName] = [];
             }
         },
         remove: function(eventName, fun) {
