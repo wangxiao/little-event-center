@@ -62,29 +62,24 @@ var eventCenter = function() {
             }
             var i = 0;
             var l = 0;
+            var listeners;
             if (eventList[eventName]) {
+                // 有可能执行过程中，通过 off 删除了某个事件对应的方法，这里先复制一份出来
+                listeners = eventList[eventName].slice();
                 i = 0;
-                l = eventList[eventName].length;
+                l = listeners.length;
                 for (; i < l; i ++) {
-                    // 有可能执行过程中，通过 off 删除了某个事件对应的方法
-                    if (l > eventList[eventName].length) {
-                        i --;
-                        l = eventList[eventName].length;
-                    }
-                    eventList[eventName][i].call(this, data);
+                    listeners[i].call(this, data);
                 }
             }
             if (eventOnceList[eventName]) {
+                // 有可能执行过程中，通过 off 删除了某个事件对应的方法，这里先复制一份出来
+                listeners = eventOnceList[eventName].slice();
                 i = 0;
-                l = eventOnceList[eventName].length;
+                l = listeners.length;
                 for (; i < l; i ++) {
-                    // 有可能执行过程中，通过 off 删除了某个事件对应的方法
-                    if (l > eventOnceList[eventName].length) {
-                        i --;
-                        l = eventOnceList[eventName].length;
-                    }
-                    eventOnceList[eventName][i].call(this, data);
-                    _off(eventName, eventOnceList[eventName][i], true);
+                    listeners[i].call(this, data);
+                    _off(eventName, listeners[i], true);
                 }
             }
             return this;
